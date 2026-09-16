@@ -114,3 +114,129 @@ function gameObject() {
         },
     };
 }
+
+
+const numPointsScored = (playerName) => {
+    const game = gameObject();
+    if (game.home.players[playerName]) {
+        return game.home.players[playerName].points;
+    }
+    else if (game.away.players[playerName]) {
+    return game.away.players[playerName].points;
+    }
+    else {
+        return "Player not found";
+    }
+}
+
+console.log(numPointsScored("Alan Anderson"));
+console.log(numPointsScored("Ben Gordon"));
+
+
+
+const shoeSize = (playerName) => {
+    const game = gameObject();
+    if (game.home.players[playerName]) {
+        return game.home.players[playerName].shoe;
+    }
+    else if (game.away.players[playerName]) {
+    return game.away.players[playerName].shoe;
+    }
+    else {
+        return "Player not found";
+    }
+}
+
+console.log(shoeSize("Alan Anderson"));
+console.log(shoeSize("Ben Gordon"));
+
+
+
+const teamColors = (teamName) => {
+  const game = gameObject();
+  if (game.home.teamName === teamName) {
+    return game.home.colors;
+  }
+   else if (game.away.teamName === teamName) {
+    return game.away.colors;
+  }
+  else {
+        return "Player not found";
+    }
+}
+
+console.log(teamColors("Brooklyn Nets"));
+console.log(teamColors("Charlotte Hornets"));
+
+
+
+const teamNames = () => {
+    const game = gameObject();
+    return [game.home.teamName, game.away.teamName];
+}
+
+console.log(teamNames());
+
+
+
+const playerNumbers = (teamName) => {
+  const game = gameObject();
+  let targetTeam;
+  if (game.home.teamName === teamName) {
+    targetTeam = game.home;
+  } else if (game.away.teamName === teamName) {
+    targetTeam = game.away;
+  } else {
+    return "Team not found";
+  }
+   const numbersArray = [];
+  for (const playerName in targetTeam.players) {
+    const playerObj = targetTeam.players[playerName];
+    numbersArray.push(playerObj.number);
+  }
+
+  return numbersArray;
+};
+
+console.log(playerNumbers("Brooklyn Nets"));
+console.log(playerNumbers("Charlotte Hornets"));
+
+
+
+const playerStats = (playerName) => {
+  const game = gameObject();
+  if (game.home.players[playerName]) {
+    return game.home.players[playerName];
+  }
+  else if (game.away.players[playerName]) {
+    return game.away.players[playerName];
+  }
+  else {
+   return "Player not found";
+  }
+};
+
+console.log(playerStats("Alan Anderson"));
+
+
+
+const bigShoeRebounds = () => {
+  const game = gameObject();
+  
+  let largestShoeSize = 0;
+  let reboundsForLargestShoe = 0;
+  const teams = [game.home, game.away];
+
+  for (const team of teams) {
+    for (const playerName in team.players) {
+      const player = team.players[playerName];
+       if (player.shoe > largestShoeSize) {
+        largestShoeSize = player.shoe;
+        reboundsForLargestShoe = player.rebounds;
+      }
+    }
+  }
+  return reboundsForLargestShoe;
+};
+
+console.log(bigShoeRebounds());
